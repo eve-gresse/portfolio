@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    
+  }
+  
+
+
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: midnightblue;
+    margin: 0;              
+    padding: 0;
+  }
+  
+  .menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .card {
+    width: 33.33333%;
+    display: block;
+    height: 200px;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    background-color: aquamarine;
+    border-radius: 0px;
+    transition: background 0.3s ease;
+    color: black;
+    font-size: x-large;
+    font-weight: bold;
+
+  }
+  
+  .card:hover .texte-hover {
+    opacity: 100%;
+  }
+
+  /* Texte masqué par défaut */
+  .texte-hover {
+    opacity: 0;
+    color: black;
+    font-size: medium;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    font-weight: 100;
+  }
+
+  .card-pfe{
+    background-image: url("images/Simon.png");
+    background-size: cover;
+    background-position: center;
+  }
+  .card-vhdl{
+    background-image: url("images/schema_processeur.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+  justify-content: space-between; /* espace entre les éléments */
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+
+  background-color: midnightblue;
+  color: pink;
+    z-index: 10;                   /* s'affiche au-dessus du contenu */
+  }
+  
+
+  .titre {
+  display: flex;
+  justify-content: space-between; /* espace entre les éléments */
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: midnightblue;
+  color: pink;
+}
+
+
+
+/* Alignements spécifiques */
+.gauche {
+  text-align: left;
+}
+
+.centre {
+  text-align: center;
+}
+
+.droite {
+  text-align: right;
+}
