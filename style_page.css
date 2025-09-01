@@ -128,6 +128,19 @@
       color: pink; 
     }
 
+    .div a {
+     color: pink;       
+    text-decoration: underline; 
+  }
+  
+    .div a:visited {
+      color: pink; 
+    }
+
+    
+    .div a:hover {
+      color: pink; 
+    }
     
     .grid {
         display: flex;

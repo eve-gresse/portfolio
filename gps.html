@@ -159,97 +159,10 @@
     
      
     <div class="footer">
-        <a href="https://blog.gistre.epita.fr/posts/eve.gresse-2024-09-05-device_communication_in_embedded_systems/">CV</a> <!-- changer avec les bonnes infos-->
-        <a>Contact</a>
-        <a>A propos de moi</a>
+        <p>Contact : evegressepro@gmail.com, 0650663766</p>
+        <a href="about.html">À propos de moi</a>
     </div>
 </body>
 
 
 </html>
-
-
-
-
-<!-- Schéma archi -->
-
-
-<!--Une fois le premier sujet réalisé on m’a donné une deuxième mission, j’ai dû développer
-une solution permettant la configuration à distance automatique de capteurs via
-LoRaWAN. Ces capteurs sont des capteurs GPS22
-(les Compact Trackers d’Abeeway
-Ⓡ). Le
-but était d’automatiser l'envoi de la configuration aux capteurs lorsqu’ils étaient allumés
-et connectés pour la première fois afin de réduire au maximum l’action humaine et ainsi
-gagner du temps.
-
-L'objectif final de ce projet était de déployer des Compact Trackers sur un maximum
-d'équipements logistiques28 ou industriels24 afin de les suivre à distance, facilitant ainsi leur
-localisation et réduisant le temps nécessaire pour les retrouver. Les Compact Trackers étaient
-déjà intégrés dans notre réseau. Le client a commandé 250 de ces dispositifs pour les installer
-dans des avions et divers équipements, permettant ainsi de les localiser précisément.
-Cependant, il fallait configurer chaque capteur manuellement, ce qui était une tâche
-fastidieuse. La mission consistait donc à développer une solution permettant la configuration
-automatique des capteurs dès leur première connexion au réseau.
-
-
-Configuration automatique des compact Trackers
-a. Envoyer la configuration via LoRa
-J’ai tout d’abord exploré la possibilité d’envoyer la configuration via LoRaWAN. En regardant le
-projet déjà déployé sur ThingWorx je me suis rendue compte que non seulement c’était
-possible mais en plus cela avait déjà été mis en place.
-Cependant, LoRaWAN impose de fortes contraintes : une taille de payload32
-réduite (5
-paramètres) et une limitation à un message toutes les 5 minutes. Configurer 200 paramètres
-devenait donc un défi technique. J’ai travaillé avec un collègue (Valentin P.) pour identifier une
-stratégie : ne modifier que les paramètres différents de la configuration par défaut. Ce choix m’a
-permis de réduire significativement le nombre de trame41 nécessaire en passant de 200
-paramètres a un peu plus d’une vingtaine.
-Nous avons alors soulevé un autre problème. Que faire si un capteur n’a pas la configuration par
-défaut initialement ? Nous ne pouvions pas demander au capteur de nous envoyer ses
-paramètres cinq par cinq pour la même raison que précédemment, cela prendrait des heures
-pour récupérer 200 les paramètres. J’ai donc pris l'initiative de rechercher dans la
-documentation du capteur un payload32 LoRa permettant de réinitialiser le capteur à ses
-paramètres d’usine, ce qui garantissait une base commune à tous les capteurs.
-11/06/2025 Airbus Defence and Space - Gresse, Eve [FR] 16
-This document and the information it contains are property of Airbus Defence and Space , It shall not be used for any purpose other than those for which it was supplied, It shall not be
-reproduced or disclosed ( in whole or in part) to any third, party without Airbus Defence and pace prior written consent. Airbus Defense and Space SAS – All rights deserved
-Ce document et les informations qu'il contient sont la propriété d'Airbus Defence and Space. Il ne doit être utilisé que pour les fins pour lesquelles il a été fourni. Il ne doit pas être
-reproduit ou divulgué (en tout ou en partie) à un tiers sans le consentement écrit préalable d'Airbus Defence and Space. Airbus Defence and Space SAS – Tous droits réservés.
-.
-DD
-b. Développement
-J’ai ensuite développé l’ensemble du script
-37 de configuration. J’ai donc commencé à voir
-comment se comportait l’envoi des données via LoRaWAN car c’était la première fois que
-j’envoyais des données à un capteur. Il existe trois classes de capteurs LoRa différents (voir
-LoRaWAN en annexe). Les Compacts Trackers étant de classe A, ils ne peuvent recevoir la
-configuration qu’au moment où ils émettent. J’ai donc conçu un système basé sur les
-évènements event_up16 de ThingWorx : à chaque réception de données du capteur, j’envoie un
-payload32 de configuration au capteur. J’ai découpé la configuration en lot de cinq paramètres,
-envoyés depuis un tableau stocké dans les propriétés de la Thing correspondant au capteur.
-Une dernière problématique persistait. Comment être sûr que le capteur à bien reçu la
-configuration ? Avec le protocole de communication LoRaWAN les informations peuvent se
-perdre. Heureusement, il se trouve que les capteurs LoRaWAN renvoient dans la grande
-majorité un ACK1 qui permet de confirmer la réception. De plus, le ACK1 du Compact Tracker
-permet de voir les informations qu’il a reçues. J’ai donc mis en place un dernier script
-37 qui gère
-l'envoi et la confirmation de réception. Le script
-37 compare les ACK1 attendus et reçus, renvoie
-les trames41 en cas d’échec, et envoie les configurations suivantes uniquement si la réception
-des données précédentes ont été confirmées.
-Pour automatiser l’ensemble, j’ai également ajouté une propriété au Thing Template, elle
-déclenche la configuration à la création d’un nouvel objet car elle est initialisée à 1 lors de la
-création et remise à 0 après la configuration. Cela permet même de configurer à distance le
-capteur si besoin en repassant simplement cette propriété à 1.
-J’ai mis un Schéma dans l’annexe reprenant l’entièreté du fonctionnement de cette
-configuration ainsi que les deux Services ThingWorx implémentés.
-Cette mission m’a permis d’exercer pleinement les démarches ingénieur : compréhension d’un
-projet, analyse de l’existant, structuration d'une solution logicielle, gestion de contrainte
-matérielle, validation et automatisation.
-
-Les compact Trackers GPS
-22
-reçoivent désormais leur configuration correctement lors de leur première
-connexion à ThingWorx. Je n’ai pas d’image d’illustration pour cette mission mais le projet a bien été
-déployé en production en Espagne. Cela permet aux clients de ne pas avoir à tout configurer à la main.-->
