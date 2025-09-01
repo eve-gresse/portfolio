@@ -47,6 +47,7 @@
 .card_title {
   font-size: x-large;
   font-weight: bold;
+  background-color: #1D1F27;
 }
 
 /* Overlay sombre */
@@ -72,7 +73,6 @@
 .card .texte-hover {
     position: relative;
     z-index: 2;
-    bottom : -20%;
 }
   
 
@@ -142,7 +142,7 @@
     }
 
     .image-container img {
-        max-width: 70%;
+        max-height: 70%;
         position: absolute;
         left: 50%;     /* centré */
         transform: translateX(-50%);
