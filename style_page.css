@@ -50,7 +50,7 @@
     }   
     
     .last_card {
-        padding-bottom: 3rem;
+        padding-bottom: 5rem;
     }
   
     .card {
@@ -182,7 +182,7 @@
     justify-content: space-between; 
     align-items: center;
     width: 100%;
-    padding: 1.2rem;
+    padding: 0.4rem;
     box-sizing: border-box;
     border-top: 1px solid pink;
     background-color: #1D1F27;

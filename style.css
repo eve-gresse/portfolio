@@ -25,6 +25,7 @@
     flex-grow: 0.8;                          /* prend tout l’espace dispo */
     gap: 1.5rem;
     padding: 2rem;
+    padding-bottom: 5rem;
   }
   
   
@@ -188,7 +189,7 @@
     justify-content: space-between; /* espace entre les éléments */
     align-items: center;
     width: 100%;
-    padding: 1.2rem;
+    padding: 0.4rem;
     box-sizing: border-box;
     border-top: 1px solid pink;
     background-color: #1D1F27;
