@@ -202,6 +202,7 @@
       cursor: pointer;
       transition: color .2s;
       text-decoration: none;
+      color: pink;    
     }
 
   .footer a:visited {
@@ -212,7 +213,9 @@
     color: palevioletred;
   }
 
-  
+ 
+
+
   .title {
   display: flex;
   justify-content: space-between; /* espace entre les éléments */

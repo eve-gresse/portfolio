@@ -127,19 +127,7 @@
       color: pink; 
     }
 
-    a {
-     color: pink;       
-    text-decoration: underline; 
-  }
-  
-     a:visited {
-      color: pink; 
-    }
-
-    
-    a:hover {
-      color: pink; 
-    }
+   
     
     .grid {
         display: flex;
@@ -194,6 +182,7 @@
       cursor: pointer;
       transition: color .2s;
       text-decoration: none;
+      color: pink;
     }
 
   .footer a:visited {
