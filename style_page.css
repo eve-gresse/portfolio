@@ -127,17 +127,17 @@
       color: pink; 
     }
 
-    .div a {
+    a {
      color: pink;       
     text-decoration: underline; 
   }
   
-    .div a:visited {
+     a:visited {
       color: pink; 
     }
 
     
-    .div a:hover {
+    a:hover {
       color: pink; 
     }
     
