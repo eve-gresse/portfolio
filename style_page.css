@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    
+  }
+  
+
+
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111217;
+    height: 100vh; /* toute la hauteur */
+    display: flex;
+    flex-direction: column;
+    color: #F6F9FF;
+  }
+  
+
+    /* Container */
+    .container {
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+        align-items: center;
+    }
+
+    /* Header */
+    header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #F6F9FF;
+    }
+
+    header .subtitle {
+        font-size: 1rem;
+        color: #c1cae1;
+        margin-bottom: 15px;
+        
+    }
+
+    /* Badges */
+    .badge {
+        display: inline-block;
+        background-color: pink;
+        color: #1D1F27;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-right: 5px;
+        margin-top: 5px;
+        
+    }   
+    
+    .last_card {
+        padding-bottom: 3rem;
+    }
+  
+    .card {
+        background-color: #1D1F27;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 1rem;
+        margin : 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        color: #F6F9FF;
+    }
+    .image-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .image-container img {
+        max-width: 50%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .image-container figcaption {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        color: #c1cae1;
+        font-style: italic;
+    }
+
+   
+    /* Section headings */
+    .card h2 {
+        color: #F6F9FF;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .card h3 {
+        color: #F6F9FF;
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+    }
+
+    .card h4 {
+        color: #F6F9FF;
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+    /* Paragraphs and lists */
+    .card p {
+        margin-bottom: 10px;
+    }
+
+    .card ul {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .card ul li {
+        margin-bottom: 5px;
+    }
+
+    /* Grid for side-by-side sections */
+    .grid {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .grid > div {
+        flex: 1;
+        min-width: 250px;
+    }
+    /* Callout box */
+    .callout {
+        background-color: #181818;
+        border-left: 5px solid #313131;
+        padding: 15px;
+        margin: 15px 0;
+        color: #c1cae1;
+        border-radius: 8px;
+    }
+
+    /* List with IDs */
+    .list-ids {
+        list-style-type: decimal;
+        margin-left: 20px;
+    }
+
+    .list-ids li {
+        margin-bottom: 5px;
+    }
+
+  
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between; /* espace entre les éléments */
+    align-items: center;
+    width: 100%;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    border-top: 1px solid pink;
+    background-color: #1D1F27;
+    color: pink;
+    z-index: 10;                   /* s'affiche au-dessus du contenu */
+  }
+
+ .footer a {
+      font-size: .95rem;
+      cursor: pointer;
+      transition: color .2s;
+      text-decoration: none;
+    }
+
+  .footer a:visited {
+    color: pink;
+  }
+
+  .footer a:hover { 
+    color: palevioletred;
+  }
+
+  
+  .title {
+  display: flex;
+  justify-content: space-between; /* espace entre les éléments */
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: #1D1F27;
+  color: pink;
+  border-bottom: 1px solid pink;
+}
+
+.highlight-white {
+  background-color: white;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;   
+}
+.highlight-red{
+  color: black;
+}
+
+.highlight-beige {
+  background-color: #F4E7D2;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;      
+}
+
+.highlight-lightred {
+  background-color: #91A7FF;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;      
+}
+
+/* Alignements spécifiques */
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}

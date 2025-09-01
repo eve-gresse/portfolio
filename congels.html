@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Développement d’une solution sur PLC pour l’automatisation du contrôle de température d’un congélateur</title>
+  <link rel="stylesheet" href="style_page.css" />
+</head>
+
+
+<body>
+    <div class="title">
+        <span class="left">Portfolio</span>
+        <span class="center">Eve Gresse</span>
+        <span class="right">Ingénieure Informatique</span>
+    </div>
+    <div class="container">
+        <header>
+            <h1>Développement d’une solution sur PLC pour l’automatisation du contrôle de température d’un congélateur</h1>
+            <div class="subtitle">Stage – Airbus Defence and Space · Communication LoRaWAN · Plateforme IoT ThingWorx · PLC Industrial Shields M‑Duino 19 R+</div>
+            <div>
+                <span class="badge">LoRaWAN</span>
+                <span class="badge">ThingWorx</span>
+                <span class="badge">Modbus (Adeunis)</span>
+                <span class="badge">Arduino / EEPROM</span>
+                <span class="badge">MAX7219</span>
+            </div>
+        </header>
+    </div>
+
+    <section class="card" id="objectif">
+        <p>
+            Lors de mon stage chez Airbus Defence and Space, j’ai travaillé sur l’automatisation du contrôle de température d’un congélateur en utilisant LoRaWAN.
+        </p>
+        <h2>1. Objectif</h2>
+        <p>
+            L’objectif était de surveiller en continu la température de congélateurs stockant des produits chimiques devant être conservés dans des conditions strictes. Le système existant, déjà connecté à <strong>ThingWorx</strong>, présentait une faiblesse : en cas de coupure réseau, la porte ne pouvait plus se verrouiller car la logique était centralisée côté plateforme.
+        </p>
+        <div class="callout">
+            <strong>But</strong> : rendre le système <em>autonome et fiable</em> en déplaçant la logique critique sur le PLC pour garantir le verrouillage automatique même hors ligne.
+        </div>
+    </section>
+
+
+    <section class="card" id="presentation">
+        <h2>2. Présentation de la mission</h2>
+        <p>
+            La réalisation de la mission repose sur un <strong>PLC M‑Duino 19 R+ (Industrial Shields)</strong> communiquant avec ThingWorx via <strong>LoRaWAN</strong>, au travers d’un convertisseur <strong>Modbus Adeunis</strong>.
+        </p>
+        <p>
+            Le rôle du PLC est de:
+        </p>
+        <ul>
+            <li>Mesurer la température et <strong>verrouiller la porte</strong> si la température sort de la plage autorisée trop longtemps.</li>
+            <li>Recevoir dynamiquement les <strong>paramètres</strong> (seuils, temporisation, offset de calibration) depuis ThingWorx.</li>
+            <li>Assurer l’<strong>autonomie</strong> en cas de coupure réseau ou électrique.</li>
+        </ul>
+        <p>
+            Le but étant de faire quelque chose de similaire a ce schéma : 
+        </p>
+        
+        <figure class="image-container">
+            <img src="images/schéma_fonctionnement_congels.png" alt="Schéma de la communication PLC / ThingWorx" />
+            <figcaption>Le PLC reçoit la configuration des seuils, de la temporisation et de l'offset via LoRaWAN. Il analyse en continu la température et si un dépassement de seuil survient il envoie une commande de verrouillage.</figcaption>
+        </figure>
+
+    </section>
+
+    
+
+    
+    <section class="card" id="demarche">
+        <h2>3. Démarche</h2>
+
+
+        <h3>3.1 Prise en main</h3>
+        <p>
+            J’ai d’abord étudié le code existant, à la fois côté ThingWorx et côté PLC, afin de comprendre les mécanismes de communication (envoi, réception et traitement des commandes).
+        </p>
+
+
+        <h3>3.2 Verrouillage automatique</h3>
+        <p>
+            Ma première contribution a été l’implémentation d’un verrouillage automatique de la porte si la température dépassait les seuils définis. Par défaut, une temporisation de 15 minutes a été fixée avant verrouillage.
+        </p>
+        <p>
+            Dans un premier temps, les seuils étaient codés en dur, ce qui manquait de flexibilité. J’ai donc modifié la logique de communication afin que les seuils puissent être configurés en temps réel depuis ThingWorx. Cela a nécessité :
+        </p>
+        <ul>
+            <li>La création d’un script côté ThingWorx pour envoyer les nouvelles valeurs,</li>
+            <li>L’adaptation du code embarqué côté PLC pour les recevoir et les appliquer.</li>
+        </ul>
+
+
+
+        <h3>3.3 Améliorations de fiabilité</h3>
+        <p>Avec mon tuteur, nous avons identifié deux limitations à corriger :</p>
+        <div class="grid">
+            <div>
+                <h4>• Sauvegarde des seuils dans la mémoire du PLC pour éviter leur perte en cas de coupure électrique.</h4>
+                <p>
+                    Utilisation de l’<strong>EEPROM</strong> pour sauvegarder les seuils et les restaurer après coupure électrique, en limitant les écritures (seulement si la valeur change) pour préserver la durée de vie.
+                </p>
+            </div>
+            <div>
+            <h4>Configuration à distance du temps avant verrouillage.</h4>
+            <p>
+                Contrainte : le convertisseur Modbus ne transmet que <strong>trois données simultanées</strong> (verrouillage, seuil min, seuil max). Pour contourner cela, j’ai réorganisé le code et mis en place un système d’identifiants (ID) :
+            </p>
+            <ul class="list-ids">
+                <li><strong>ID 0</strong> : commande de verrouillage</li>
+                <li><strong>ID 1</strong> : mise à jour des seuils</li>
+                <li><strong>ID 2</strong> : mise à jour du temps de temporisation</li>
+                <li><strong>ID 3</strong> : mise à jour de l'offset</li>
+            </ul>
+            <p>
+                J'ai ajouté également un système de vérification des envois grâce a une file d'attente afin d'être certains que le PLC à bien reçu les messages de ThingWorx.
+            </p>
+            </div>
+        </div>
+
+        <h3>3.4 Ajouts fonctionnels</h3>
+
+        <p>Enfin, plusieurs améliorations ont été apportées pour l’expérience utilisateur :</p>
+        <ul>
+            <li><strong>Afficheur LED (driver MAX7219) :</strong>  affichage en temps réel de la température et des alarmes (dépassement de seuil, verrou activé) directement sur site.</li>
+            <li><strong>Offset de calibration :</strong>  configurable depuis ThingWorx, pour corriger les éventuelles dérives de mesure et garantir une valeur de température fiable dans le temps.</li>
+        </ul>
+        <figure class="image-container">
+            <img src="images/schema_congel.jpg" alt="Mashup overwiew" />
+            <figcaption>Organigramme du la logique mise en place</figcaption>
+        </figure>
+    </section>
+    <section class="last_card">
+        <section class="card" id="demarche">
+            <h2>4. Résultats</h2>
+            <p>
+                J'ai donc pu mener a bien cette mission le PLC et ThingWorx communiquent bien. La porte se verrouille
+                automatiquement lorsque la température n’est pas comprise dans les seuils
+                pendant un temps donné. Les seuils, l'offset et le temps peuvent être changés à tout moment depuis ThingWorx ce qui
+                met à jour le PLC.
+            </p>
+            <p> J'ai également pu lors de cette mission améliorer les interfaces utilisateur ThingWorx afin de les rendre plus lisible et faciles a prendre en main.</p>
+            <figure class="image-container">
+                <img src="images/mashup_fridge1.png" alt="Mashup overwiew" />
+                <figcaption>Interface principale, on peut y voir tout les éléments importants comme la température dans le temps, les seuils et les alarmes</figcaption>
+            </figure>
+            <figure class="image-container">
+                <img src="images/mashup_fridge3.png" alt="Mashup overwiew" />
+                <figcaption>Interface de configuration, lorsque l'on modifie ici un paramètre il est ensuite envoyé au PLC afin de modifier ses paramètres.</figcaption>
+            </figure>
+
+        </section>
+    </section>
+    <div class="footer">
+        <a href="https://blog.gistre.epita.fr/posts/eve.gresse-2024-09-05-device_communication_in_embedded_systems/">CV</a> <!-- changer avec les bonnes infos-->
+        <a>Contact</a>
+        <a>A propos de moi</a>
+    </div>
+</body>
+
+
+</html>
+<!--
+Développement d’une solution sur PLC pour l’automatisation du contrôle de
+température d’un congélateur
+
+Lors de mon stage chez Airbus Defence and Space j'ai eu l'occasion de réaliser une mission 
+qui consitait en l'automatisation du contrôle de température d'un congélateur en utilisant LoRaWAN.
+
+1.  objectif
+L’objectif de ce projet est de surveiller la température dans de congélateurs qui
+stockent des produits chimiques et qui doivent être maintenus dans des conditions strictes afin
+de préserver leurs propriétés. Ce projet était déjà en test et connecté a ThingWorx. Une
+mise à jour était cependant nécessaire afin de pouvoir pallier à une éventuelle coupure de
+réseau, car le cas échéant la porte ne pouvait se verrouiller si la température n’était plus
+adéquate dans le congélateur etant donné que toute la logique de l'implémentation était faite sur 
+ThingWorx. Il était important pour nous que le projet fonctionne en toute
+circonstance car il est déployé à un endroit critique où la température doit être contrôlée en
+toute circonstance.
+
+
+2. Présentation
+J’ai donc développé une solution sur un PLC M-duino 19 R+ de la marque
+Industrial ShieldsⓇ communicant avec ThingWorx via LoRaWAN. Le PLC doit récupérer
+la température d’un congélateur et verrouiller sa porte si la température n’est pas comprise 
+entre deux seuils pendant trop longtemps.  Les paramètres (seuils, temps avant verrouillage) sont définis sur Thingworx
+et doivent être envoyé via LoRaWAN à un convertisseur Modbus de la marque AdeunisⓇ qui communique avec le PLC. 
+Le but était de créer une solution directement sur le PLC pour gagner en fiabilité et que le PLC soit
+autonome en cas de coupure réseau. 
+J’ai donc développé un code embarqué sur le PLC qui
+réalise une comparaison de la température avec les seuils et qui verrouille automatiquement la porte du
+congélateur si l'un des seuil est dépassé pendant trop longtemps. 
+
+3. Démarche
+Ce projet était déjà connecté et fonctionnel, mais avec des axes d’amélioration identifiés. Mon
+travail a donc consisté à le faire évoluer, en apportant de nouvelles fonctionnalités. J’ai
+commencé par me familiariser avec la base de code déjà existante sur ThingWorx mais aussi sur
+le PLC. Cette phase de prise en main m’a permis d’analyser en détail la communication entre
+ThingWorx et le PLC, ainsi que les mécanismes d’envoi, de réception et de traitement des
+commandes.
+Ma première contribution a été l’ajout d’une fonctionnalité de verrouillage automatique de la
+porte si la température mesurée sortait des seuils définis directement sur le PLC. J’ai commencé par implémenter une
+valeur par défaut de temps avant verrouillage (15 minutes). Si
+au terme de cette durée la température relevée reste en dehors des plages admissibles, alors le
+système verrouille la porte. Dans un premier temps, les seuils de température étaient définis
+en dur dans le code, ce qui limitait la flexibilité de l’utilisateur.
+J’ai donc modifié la logique de communication entre ThingWorx et le PLC afin de permettre
+l’envoi dynamique de ces seuils. Cela m’a demandé de créer un nouveau script
+côté ThingWorx pour transmettre ces valeurs dès qu’elles étaient modifiées dans l’interface
+utilisateur. Côté Arduino, j’ai adapté le code pour recevoir et décoder ces nouvelles données.
+Cette évolution a permis à l’utilisateur de configurer les seuils de température en temps réel,
+sans devoir modifier manuellement le code du microcontrôleur.
+À ce stade, le système était fonctionnel : les seuils étaient configurables à distance et le
+verrouillage automatique de la porte s’effectuait correctement. Toutefois, après discussion avec
+mon tuteur de stage, nous avons identifié deux limitations majeures à corriger pour renforcer la
+fiabilité du système, le but étant de rendre le PLC autonome en cas de soucis :
+● La sauvegarde des données de seuil dans la mémoire du PLC pour qu’en cas de coupure
+de courant il puisse conserver la valeur des seuils
+sans que ThingWorx n’ait besoin de
+les renvoyer.
+● La configuration à distance du temps avant verrouillage, nous ne l’avions pas établi dans
+un premier temps mais il nous a paru plus logique après coup de pouvoir envoyer
+également cette valeur depuis ThingWorx à tout moment.
+Pour répondre au premier point, j’ai utilisé la mémoire EEPROM de l’Arduino afin de
+sauvegarder les seuils de température. J’ai fait attention à ne pas trop solliciter cette mémoire,
+limitée en nombre de cycles d’écriture, en ne l’écrivant que lorsqu’une nouvelle valeur était
+reçue et différente de la précédente.
+La configuration à distance du temps avant verrouillage s’est révélée plus complexe. Le
+Convertisseur Modbus utilisé entre ThingWorx et le PLC ne permettait de transmettre que trois
+données simultanément, et cette limite était déjà atteinte (verrouillage, seuil min, seuil max).
+J’ai alors pris l’initiative de réorganiser l’ensemble du code Arduino, en le divisant en modules
+pour plus de clarté et de maintenabilité. Ensuite, j’ai introduit un système d’identifiants (ID)
+pour chaque type de message :
+● ID 0 : commande de verrouillage
+● ID 1 : mise à jour des seuils
+● ID 2 : mise à jour du temps de temporisation
+Chaque message envoyé depuis ThingWorx inclut désormais cet identifiant, ce qui permet au
+PLC de traiter correctement l’information reçue. J’ai également mis en place une file d’attente
+dans ThingWorx pour envoyer les messages un par un, en s’assurant que chacun ait bien été
+reçu et traité avant d’envoyer le suivant. Ce mécanisme de synchronisation garantit la fiabilité
+de la communication, même en cas de modification simultanée de plusieurs paramètres.
+
+Une fois ceci mis en place, il m'a été demandé de faire quelques ajouts pour améliorer l'expérience 
+utilisateur et la fiabilité.
+Tout d'abord j'ai ajouté des afficheur LED contrôlés par le driver MAX7219 afin d'afficher la température
+mesuré directement sur place afin que les utilisateurs puissent voir la température sans avoir a regarder 
+sur l'interface ThingWorx. J'ai également affiché quelques alarmes sur ce driver comme le dépassement de seuil ou 
+le verrou activé.
+
+Dans un deuxième temps on m'a d'ajouter un offset configurable depuis ThingWorx afin de pouvoir
+calibrer la température et ainsi avoir une température fiable. J'ai donc ajouté le calcul de 
+l'offset sur le PLC et l'envoi de celui ci depuis ThingWorx. En rajoutant simplement un ID.
+
+Voici une représentation des branchements sur le PLC. 
+
+Ici une représentation schématique du code.
+
+
+4. Compétences acquises
+
+LoRaWAN : 
+
+ThingWorx :
+Hardware utilisé 
+PLC : 
+Convertisseur Modbus : 
+Arduino IDE :
+EEPROM
+-->

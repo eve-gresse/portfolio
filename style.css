@@ -5,47 +5,98 @@
   
 
 
-body {
+  body {
     font-family: sans-serif;
-    text-align: center;
-    background-color: midnightblue;
-    margin: 0;              
+    margin: 0;
     padding: 0;
+    background-color: #111217;
+    height: 100vh; /* toute la hauteur */
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    
   }
+  
   
   .menu {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    width: 100%;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    grid-template-rows: repeat(2, 1fr);    /* 3 lignes */
+    flex-grow: 0.8;                          /* prend tout l’espace dispo */
+    gap: 1.5rem;
+    padding: 2rem;
   }
   
+  
   .card {
-    width: 33.33333%;
+    position: relative; /* important pour l'overlay */
     display: block;
-    height: 200px;
-    padding: 20px;
-    color: white;
+    border-radius: 0.8rem;
+    padding: 1.2rem;
     text-decoration: none;
-    background-color: aquamarine;
-    border-radius: 0px;
     transition: background 0.3s ease;
-    color: black;
-    font-size: x-large;
-    font-weight: bold;
+    
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    
+    overflow: hidden; /* pour que l'overlay ne dépasse pas */
+    background-color: #1D1F27;
+    color: #F6F9FF;
+    
+}
 
+.card_title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+/* Overlay sombre */
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0); /* transparent par défaut */
+    transition: background-color 0.3s ease;
+    z-index: 1; /* derrière le texte */
+}
+
+/* Au survol, assombrir l'image */
+.card:hover::before {
+    background-color:  #1D1F27; /* 50% noir */
+}
+
+
+/* Texte au-dessus de l'overlay */
+.card .texte-hover {
+    position: relative;
+    z-index: 2;
+    bottom : -20%;
+}
+  
+
+  .card:nth-child(7) {
+    grid-column: 2; /* la placer en colonne du milieu */
   }
+
+ 
   
   .card:hover .texte-hover {
     opacity: 100%;
   }
 
+  .grid_title{
+    content: "";
+  }
+
+  .card span {
+    position: relative;
+    z-index: 2;
+  }
   /* Texte masqué par défaut */
   .texte-hover {
     opacity: 0;
-    color: black;
     font-size: medium;
     transition: opacity 0.3s ease;
     z-index: 2;
@@ -56,31 +107,112 @@ body {
     background-image: url("images/Simon.png");
     background-size: cover;
     background-position: center;
+    color: black;
   }
+
   .card-vhdl{
     background-image: url("images/schema_processeur.png");
     background-size: cover;
     background-position: center;
   }
 
+  .card-blog{
+    background-image: url("images/blog_gistre.png");
+    background-size: cover;
+    background-position: center;
+    color: pink;
+  }
+
+  .card-GPS{
+    background-image: url("images/configuration_GPS.png");
+    background-size: cover;
+    background-position: center;
+  }
+  
+
+  .card-congels{
+    background-image: url("images/verrouillage_congélateur.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+    .image-container {
+        text-align: center;
+        
+    }
+
+    .image-container img {
+        max-width: 70%;
+        position: absolute;
+        left: 50%;     /* centré */
+        transform: translateX(-50%);
+        bottom: 2rem;  /* distance du bas */
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .image-container figcaption {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        color: #c1cae1;
+        font-style: italic;
+    }
+
+    .badge {
+        display: inline-block;
+        background-color: pink;
+        color: #1D1F27;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        
+    }   
+
+    .badge_container 
+    {
+      bottom : -4rem;
+    }
+
+    .badge_container strong
+    {
+      font-weight: 550;  
+      margin-right: 0.5rem;
+    }
+
   .footer {
     position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
-  justify-content: space-between; /* espace entre les éléments */
-  align-items: center;
-  width: 100%;
-  padding: 10px 20px;
-  box-sizing: border-box;
-
-  background-color: midnightblue;
-  color: pink;
+    justify-content: space-between; /* espace entre les éléments */
+    align-items: center;
+    width: 100%;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    border-top: 1px solid pink;
+    background-color: #1D1F27;
+    color: pink;
     z-index: 10;                   /* s'affiche au-dessus du contenu */
   }
-  
 
-  .titre {
+ .footer a {
+      font-size: .95rem;
+      cursor: pointer;
+      transition: color .2s;
+      text-decoration: none;
+    }
+
+  .footer a:visited {
+    color: pink;
+  }
+
+  .footer a:hover { 
+    color: palevioletred;
+  }
+
+  
+  .title {
   display: flex;
   justify-content: space-between; /* espace entre les éléments */
   align-items: center;
@@ -89,21 +221,44 @@ body {
   box-sizing: border-box;
   font-size: xx-large;
   font-weight: bold;
-  background-color: midnightblue;
+  background-color: #1D1F27;
   color: pink;
+  border-bottom: 1px solid pink;
 }
 
+.highlight-white {
+  background-color: white;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;   
+}
+.highlight-red{
+  color: black;
+}
 
+.highlight-beige {
+  background-color: #F4E7D2;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;      
+}
+
+.highlight-lightred {
+  background-color: #91A7FF;
+  display: inline-block;
+  padding: 2px 4px;      
+  line-height: 1.5;      
+}
 
 /* Alignements spécifiques */
-.gauche {
+.left {
   text-align: left;
 }
 
-.centre {
+.center {
   text-align: center;
 }
 
-.droite {
+.right {
   text-align: right;
 }

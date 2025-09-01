@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio – Eve Gresse</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface-hover: #1f2937;
+      --text: #e6edf3;
+      --muted: #9ca3af;
+      --accent1: #ef4444;
+      --accent2: #facc15;
+      --accent3: #22c55e;
+      --accent4: #3b82f6;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-hover);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header span {
+      font-size: 1rem;
+    }
+    .header .center {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent4);
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 0.8rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .card:hover {
+      background: var(--surface-hover);
+      transform: translateY(-4px);
+    }
+
+    .card span:first-child {
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+    .texte-hover {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .highlight-lightred { color: var(--accent1); }
+    .highlight-white { color: var(--text); }
+    .highlight-beige { color: var(--accent2); }
+    .grid_title { color: var(--accent3); font-weight: 600; }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.2rem;
+      border-top: 1px solid var(--surface-hover);
+      background: var(--surface);
+      margin-top: 2rem;
+    }
+    .footer span {
+      font-size: .95rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .footer span:hover { color: var(--accent4); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="left">Portfolio</span>
+    <span class="center">Eve Gresse</span>
+    <span class="right">Ingénieure Informatique</span>
+  </div>
+
+  <div class="menu">
+    <a class="card" href="pfe.html">
+      <span class="highlight-lightred">Super Simon</span>
+      <span class="texte-hover">Projet de fin d’études : conception d’un jeu de type Simon, couvrant matériel et logiciel, réalisé sur deux semestres en suivant tout le cycle de vie du projet.</span>
+    </a>
+
+    <a class="card" href="vhdl.html">
+      <span class="highlight-white">Monoprocesseur VHDL</span>
+      <span class="texte-hover">Conception d’un processeur monocœur à l’aide d’un FPGA, description matérielle en VHDL et simulation avec ModelSim.</span>
+    </a>
+
+    <a class="card" href="congels.html">
+      <span class="highlight-beige">Gestion de température dans un congélateur via LoRaWAN</span>
+      <span class="texte-hover">Projet Airbus DS : développement d’un système de verrouillage automatique de congélateur avec automate programmable et communication LoRaWAN.</span>
+    </a>
+
+    <a class="card" href="gps.html">
+      <span class="highlight-white">Configuration à distance de capteurs GPS</span>
+      <span class="texte-hover">Projet Airbus DS : mise en place d’un système de configuration à distance de capteurs GPS via LoRaWAN pour optimiser les opérations logistiques.</span>
+    </a>
+
+    <a class="card" href="ipro.html">
+      <span class="grid_title">Déplacement autonome d'une voiture</span>
+      <span class="texte-hover">Développement d’un véhicule autonome miniature capable de suivre un parcours délimité, grâce à une caméra, une Raspberry Pi 3 et une carte Arduino.</span>
+    </a>
+
+    <a class="card" href="https://blog.gistre.epita.fr/posts/eve.gresse-2024-09-05-device_communication_in_embedded_systems/">
+      <span class="grid_title">Blog</span>
+      <span class="texte-hover">Article technique sur les protocoles de communication UART, SPI et I2C : caractéristiques, avantages et cas d’utilisation.</span>
+    </a>
+  </div>
+
+  <div class="footer">
+    <span class="footer_link" href="https://blog.gistre.epita.fr/posts/eve.gresse-2024-09-05-device_communication_in_embedded_systems/">CV</span>
+    <span>Contact</span>
+    <span>A propos de moi</span>
+  </div>
+</body>
+</html>
