@@ -1,0 +1,12 @@
+"Id";"Référence";"Empreinte";"Quantité";"Désignation";"Fournisseur et réf";
+1;"RV1";"Potentiometer_Alps_RK09K_Single_Horizontal";1;"R_Potentiometer_MountingPin";;;
+2;"D4,D1,D7,D8,D3,D6,D2,D5";"LED_D5.0mm-4_RGB_Wide_Pins - Easy";8;"LED_ARGB";;;
+3;"C6";"C_Radial_D6.3mm_H5.0mm_P2.50mm";1;"100nF";;;
+4;"SW5,SW8,SW2,SW6,SW3,SW7,SW4,SW1";"SW_Cherry_MX_PCB_1.00u";8;"SW_Push";;;
+5;"Nuc1";"MODULE_NUCLEO-32";1;"NUCLEO-F303K8";;;
+6;"R7,R1,R8,R2,R5,R4,R3,R6";"R_0603_1608Metric";8;"10kΩ";;;
+7;"J1";"TerminalBlock_bornier-2_P5.08mm";1;"Screw_Terminal_01x02";;;
+8;"U5";"HTSSOP-32-1EP_6.1x11mm_P0.65mm_EP5.2x11mm_Mask4.11x4.36mm_ThermalVias";1;"TLC5947DAP";;;
+9;"R11";"R_0603_1608Metric";1;"2.49kΩ";;;
+10;"SW9";"SW_Slide-03_Wuerth-WS-SLTV_10x2.5x6.4_P2.54mm";1;"SW_Wuerth_450301014042";;;
+11;"BZ1";"Buzzer 9x5.5mm";1;"Buzzer";;;

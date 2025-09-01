@@ -17,7 +17,6 @@
   }
   
 
-    /* Container */
     .container {
         max-width: 90%;
         margin: 0 auto;
@@ -25,7 +24,6 @@
         align-items: center;
     }
 
-    /* Header */
     header h1 {
         font-size: 2rem;
         margin-bottom: 10px;
@@ -39,7 +37,6 @@
         
     }
 
-    /* Badges */
     .badge {
         display: inline-block;
         background-color: pink;
@@ -85,7 +82,7 @@
     }
 
    
-    /* Section headings */
+  
     .card h2 {
         color: #F6F9FF;
         margin-bottom: 10px;
@@ -103,7 +100,7 @@
         font-size: 1rem;
         margin-bottom: 6px;
     }
-    /* Paragraphs and lists */
+    /
     .card p {
         margin-bottom: 10px;
     }
@@ -117,7 +114,21 @@
         margin-bottom: 5px;
     }
 
-    /* Grid for side-by-side sections */
+    .card a {
+     color: inherit;       
+    text-decoration: underline; 
+  }
+  
+    .card a:visited {
+      color: inherit; 
+    }
+
+    
+    .card a:hover {
+      color: pink; 
+    }
+
+    
     .grid {
         display: flex;
         gap: 20px;
@@ -128,7 +139,7 @@
         flex: 1;
         min-width: 250px;
     }
-    /* Callout box */
+    
     .callout {
         background-color: #181818;
         border-left: 5px solid #313131;
@@ -138,7 +149,7 @@
         border-radius: 8px;
     }
 
-    /* List with IDs */
+   
     .list-ids {
         list-style-type: decimal;
         margin-left: 20px;
@@ -155,7 +166,7 @@
     bottom: 0;
     left: 0;
     display: flex;
-    justify-content: space-between; /* espace entre les éléments */
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
     padding: 1.2rem;
@@ -163,7 +174,7 @@
     border-top: 1px solid pink;
     background-color: #1D1F27;
     color: pink;
-    z-index: 10;                   /* s'affiche au-dessus du contenu */
+    z-index: 10;                  
   }
 
  .footer a {
@@ -184,7 +195,7 @@
   
   .title {
   display: flex;
-  justify-content: space-between; /* espace entre les éléments */
+  justify-content: space-between; 
   align-items: center;
   width: 100%;
   padding: 10px 20px;
@@ -220,7 +231,7 @@
   line-height: 1.5;      
 }
 
-/* Alignements spécifiques */
+
 .left {
   text-align: left;
 }

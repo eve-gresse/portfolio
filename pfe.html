@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Simon – Refonte d’un jeu électronique emblématique</title>
+  <link rel="stylesheet" href="style_page.css" />
+</head>
+
+<body>
+    <div class="title">
+        <span class="left">Portfolio</span>
+        <span class="center">Eve Gresse</span>
+        <span class="right">Ingénieure Informatique</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Super Simon – Refonte d’un jeu électronique emblématique</h1>
+            <div class="subtitle">Projet de fin d’études · STM32 · Développement embarqué · Conception PCB · Jeu interactif</div>
+            <div>
+                <span class="badge">STM32</span>
+                <span class="badge">C embarqué</span>
+                <span class="badge">PCB (KiCad)</span>
+                <span class="badge">LED RGB</span>
+                <span class="badge">Buzzer</span>
+                <span class="badge">Jeu électronique</span>
+            </div>
+        </header>
+    </div>
+
+    <section class="card" id="objectif">
+        <h2>1. Objectif</h2>
+        <p>
+            Le projet consistait à revisiter le jeu électronique <strong>Simon</strong> (1978), basé sur la mémorisation et la reproduction de séquences lumineuses et sonores. 
+            L’objectif était de moderniser et enrichir ce concept en développant une version améliorée (Super Simon) intégrant de nouveaux modes de jeu, des niveaux de difficulté et un design électronique personnalisé.
+        </p>
+        <div class="callout">
+            <strong>But</strong> : développer un prototype <em>innovant et fonctionnel</em> combinant électronique, programmation embarquée et conception hardware, tout en gardant l’esprit du jeu original.
+        </div>
+    </section>
+
+    <section class="card" id="presentation">
+        <h2>2. Présentation du projet</h2>
+        <p>
+            Le <strong>Super Simon</strong> est composé d’une carte électronique dédiée avec un microcontrôleur STM32, 8 boutons lumineux, un buzzer, une alimentation par pile 9V rechargeable et un boîtier ergonomique.
+        </p>
+        
+            Il propose plusieurs <strong>niveaux de difficulté</strong> 
+        </p>
+        <ul>
+            <li><strong>Trivial</strong> : La vitesse des séquences est réduite.</li>
+            <li><strong>Normal</strong> : Mode standard avec une vitesse de séquence modérée.</li>
+            <li><strong>Légende</strong> : La vitesse des séquences augmente rapidement.</li>
+        </ul>
+        
+        <p>
+            Et différents <strong>modes de jeu</strong> :
+        </p>
+        <ul>
+            <li><strong>Classique</strong> : Le Simon affiche une séquence de touches en ajoutant une nouvelle touche à chaque manche. Le joueur doit la reproduire sans erreur. Seules 4 couleurs sont utilisées.</li>
+            <li><strong>8 couleurs</strong> : Version plus complexe avec 8 touches.</li>
+            <li><strong>Fantôme</strong> : Les LED s’éteignent après affichage.</li>
+            <li><strong>Color Switch</strong> : Les couleurs changent de place après chaque séquence.</li>
+            <li><strong>Partie rapide</strong> : Deux nouvelles touches ajoutées par manche, rendant le jeu plus dynamique.</li>
+            <li><strong>Duel</strong> : Affrontement entre deux joueurs. </li>
+        </ul>
+    </section>
+
+    <section class="card" id="demarche">
+        <h2>3. Démarche</h2>
+
+        <h3>3.1 Conception hardware</h3>
+        <p>
+            Deux versions de PCB ont été conçues sous <strong>KiCad</strong>. La première a révélé des erreurs de conception (erreurs d'empreinte, inversion de pins), corrigées dans une seconde version optimisée.
+        </p>
+
+        <h3>3.2 Développement firmware</h3>
+        <p>
+            Le firmware a été conçu de manière modulaire pour intégrer facilement les différents modes de jeu. 
+            Une bibliothèque spécifique a été développée pour contrôler les LEDs RGB, et le buzzer a été programmé pour générer des sons distincts et des musiques de fin.
+        </p>
+
+        <h3>3.3 Contraintes et problèmes rencontrés</h3>
+        <div class="grid">
+            <div>
+                <h4>Contraintes budgétaires</h4>
+                <p>
+                    Choix de composants alternatifs et suppression de l’écran initialement prévu.
+                </p>
+            </div>
+            <div>
+                <h4>Difficultés techniques</h4>
+                <p>
+                    Problèmes d’empreintes de composants, faux-contacts sur breadboard, et impossibilité d’intégrer l’écran LCD (tableau des scores, chronomètre, tutoriel).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+
+    <section class="card" >
+        <h2>4. Démonstration</h2>
+
+        <video width="640" height="360" controls>
+                <source src="images/VidéoSuperSimon.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+    </section>
+
+    <section class="last_card">
+        <section class="card" id="resultats">
+            <h2>5. Résultats</h2>
+            <p>
+                Un prototype <strong>fonctionnel</strong> a été réalisé : toutes les fonctionnalités principales sont opérationnelles (séquences lumineuses, sons, multi-joueurs, modes bonus).
+            </p>
+            <p>
+                Les tests menés ont validé 11 fonctionnalités, 2 partiellement et 1 non validée faute de temps.
+            </p>
+            <p>
+                Le projet a permis de développer des compétences en <strong>programmation embarquée</strong>, <strong>conception de PCB</strong> et <strong>travail en équipe</strong> sur un projet long terme.
+            </p>
+            <div class="callout">
+                <strong>Perspectives</strong> : ajout d’un écran pour améliorer l’ergonomie, création de nouveaux modes de jeu et simplification du système de mise à jour pour tendre vers une version commercialisable.
+            </div>
+            <p>
+                Si vous désirez allez plus loin et avoir plus d'informations sur ce projet je met a votre disposition les différents fichiers composant le rendu du projet :
+            </p>
+            <ul>
+                
+                <li><a href="images/VidéoSuperSimon.mp4" target="_blank">Vidéo de démontration du Super Simon</a></li>
+                <li><a href="documents/Cahier_des_charges.pdf" target="_blank">Cahier des charges</a></li>
+                <li><a href="documents/Rapport_de_soutenance.pdf" target="_blank">Rapport de soutenance finale</a></li>
+                <li><a href="documents/Manuel_utilisateur.pdf" target="_blank">Manuel utilisateur</a></li>
+                <li>Fichiers KiCad : <a href="images/pcb_v2.png" target="_blank">Image Circuit</a>, <a href="documents/BOMSuperSimon.csv" target="_blank">BOM</a></li>
+            </ul>
+        </section>
+    </section>
+
+    <div class="footer">
+        <a href="cv.html">CV</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">À propos de moi</a>
+    </div>
+</body>
+</html>
